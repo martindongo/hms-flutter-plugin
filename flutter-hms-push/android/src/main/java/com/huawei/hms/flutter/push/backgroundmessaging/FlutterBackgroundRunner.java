@@ -38,13 +38,13 @@ import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.embedding.engine.dart.DartExecutor;
 import io.flutter.embedding.engine.dart.DartExecutor.DartCallback;
 import io.flutter.embedding.engine.loader.FlutterLoader;
-import io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry;
+//import io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback;
+//import io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback;
 import io.flutter.view.FlutterCallbackInformation;
 
 import java.util.Arrays;
@@ -61,7 +61,7 @@ public class FlutterBackgroundRunner implements MethodCallHandler {
     public static final String USER_CALLBACK_KEY = "push_background_message_callback";
 
     // Deprecated, Support for backwards compatibility with V1 embedding.
-    private static PluginRegistrantCallback pluginRegistrantCallback;
+    //private static PluginRegistrantCallback pluginRegistrantCallback;
 
     private final AtomicBoolean isCallbackDispatcherReady = new AtomicBoolean(false);
 
@@ -72,9 +72,9 @@ public class FlutterBackgroundRunner implements MethodCallHandler {
     private long bgMessagingCallback;
 
     // For Backwards Compatibility with V1 Plugin registration.
-    public static void setPluginRegistrantCallback(final PluginRegistrantCallback callback) {
+/*     public static void setPluginRegistrantCallback(final PluginRegistrantCallback callback) {
         pluginRegistrantCallback = callback;
-    }
+    } */
 
     public static void setCallBackDispatcher(final Context context, final long callbackHandle) {
         final SharedPreferences prefs = context.getSharedPreferences(Core.PREFERENCE_NAME, Context.MODE_PRIVATE);
@@ -130,9 +130,9 @@ public class FlutterBackgroundRunner implements MethodCallHandler {
                     executor.executeDartCallback(dartCallback);
 
                     // For V1 Embedding
-                    if (pluginRegistrantCallback != null) {
+                    /* if (pluginRegistrantCallback != null) {
                         pluginRegistrantCallback.registerWith(new ShimPluginRegistry(flutterEngine));
-                    }
+                    } */
 
                 }
             });

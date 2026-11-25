@@ -24,7 +24,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
 
-import io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback;
+//import io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -44,10 +44,20 @@ public class BackgroundMessagingService extends JobIntentService {
         BackgroundMessagingService.backgroundRunner = bgRunner;
     }
 
+/**
+     * Il codice rimosso serviva a registrare i plugin nell’engine che gestisce i messaggi 
+     * in background per compatibilità con l’embedding v1. 
+     * Usava PluginRegistrantCallback e ShimPluginRegistry: dato che queste classi non sono più presenti, 
+     * Java non riusciva a compilare.
+
+    Il plugin usa già l’embedding v2 tramite PushPlugin. 
+    La modifica rimuove quindi il percorso legacy, 
+    non la creazione dell’engine né l’avvio del callback Dart in background.
+ */
     // For Backwards Compatibility with V1 Plugin registration.
-    public static void setPluginRegistrantCallback(final PluginRegistrantCallback callback) {
+/*     public static void setPluginRegistrantCallback(final PluginRegistrantCallback callback) {
         FlutterBackgroundRunner.setPluginRegistrantCallback(callback);
-    }
+    } */
 
     public static void setUserCallback(final Context context, final long userCallback) {
         FlutterBackgroundRunner.setUserCallback(context, userCallback);
